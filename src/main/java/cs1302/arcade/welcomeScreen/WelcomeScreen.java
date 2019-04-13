@@ -9,7 +9,7 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.image.*;
 
-public class WelcomeScreen extends Scene  {
+public class WelcomeScreen extends BorderPane  {
     
     private StackPane stack;
     private Rectangle rect;
@@ -19,22 +19,24 @@ public class WelcomeScreen extends Scene  {
     private HBox gameTwoLayer;
 
     public WelcomeScreen() {
+	super();
 	setRect();
 	setStack();
-	super(stack, 300, 300);
-	Color scCol = Color.LIGHTBLUE;
-	this.setFill(scCol);
+	this.setCenter(stack);
     }
     public void setRect() {
 	Color rCol = Color.DARKSLATEBLUE;
-	rect = new Rectangle(50, 200, rCol);
+	rect = new Rectangle(400, 360, rCol);
 	Color sCol = Color.INDIANRED;
 	rect.setStroke(sCol);
 	rect.setStrokeWidth(5);
+
     }//setRect
-    public void setStack() {
+    public StackPane setStack() {
 	stack = new StackPane();
+	stack.setAlignment(rect, Pos.CENTER);
 	stack.getChildren().add(rect);
+	return stack;
     }//setStack
 
 }
