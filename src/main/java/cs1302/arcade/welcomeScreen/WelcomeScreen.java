@@ -3,10 +3,12 @@ package cs1302.arcade.welcomeScreen;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafs.scene.control.*;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;
+import javafx.scene.image.*;
+
 public class WelcomeScreen extends Scene  {
     
     private StackPane stack;
@@ -15,19 +17,24 @@ public class WelcomeScreen extends Scene  {
     private VBox textLayer;
     private HBox gameOneLayer;
     private HBox gameTwoLayer;
-    public static WelcomeScreen() {
-	super(stack);
+
+    public WelcomeScreen() {
+	setRect();
+	setStack();
+	super(stack, 300, 300);
 	Color scCol = Color.LIGHTBLUE;
 	this.setFill(scCol);
     }
-    public static void setRect() {
+    public void setRect() {
 	Color rCol = Color.DARKSLATEBLUE;
 	rect = new Rectangle(50, 200, rCol);
 	Color sCol = Color.INDIANRED;
 	rect.setStroke(sCol);
 	rect.setStrokeWidth(5);
     }//setRect
-    public static void setStack() {
+    public void setStack() {
 	stack = new StackPane();
-	stackPane.getChildren().add(rect);
-    }
+	stack.getChildren().add(rect);
+    }//setStack
+
+}
