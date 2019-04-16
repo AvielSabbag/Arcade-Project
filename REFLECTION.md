@@ -6,7 +6,7 @@ click on this file in your team's GitHub repository website, then you will see
 that the Markdown is transformed into nice looking HTML.
 
 Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
-## TUS 2019-04-16 @ 5:45 PM EST
+## TUE 2019-04-16 @ 5:45 PM EST
 
 1. **DONE:** Created a Welcome Screen custom compenent with a title and list of games to choose from. Edited Arcade App in order to test this scene
 
