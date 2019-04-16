@@ -1,5 +1,6 @@
 package cs1302.arcade.welcomeScreen;
 
+import javafx.application.*;
 import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
@@ -10,6 +11,7 @@ import javafx.scene.shape.*;
 import javafx.scene.image.*;
 import javafx.scene.text.*;
 import javafx.scene.effect.*;
+import javafx.scene.input.*;
 
 public class WelcomeScreen extends BorderPane  {
     
@@ -22,6 +24,8 @@ public class WelcomeScreen extends BorderPane  {
     private Text gameTwo;
     private Text title;
     private Text names;
+    private Text exit;
+
     public WelcomeScreen() {
 	super();
 	setRect();
@@ -44,8 +48,10 @@ public class WelcomeScreen extends BorderPane  {
 	stack.setAlignment(rect, Pos.CENTER);
 	stack.setAlignment(titleLayer, Pos.TOP_CENTER);
 	stack.setAlignment(gamesLayer, Pos.CENTER);
+	stack.setAlignment(exit, Pos.BOTTOM_RIGHT);
 	stack.setMargin(titleLayer, new Insets(20, 20, 10, 10));
-	stack.getChildren().addAll(rect, titleLayer, gamesLayer);
+	stack.setMargin(exit, new Insets(10, 10, 10, 10));
+	stack.getChildren().addAll(rect, titleLayer, gamesLayer, exit);
 	return stack;
     }//setStack
 
@@ -100,6 +106,16 @@ public class WelcomeScreen extends BorderPane  {
 	gameTwo.setFill(Color.INDIANRED);
 	gameTwo.setText("@- 2048");
 	gameTwo.setFont(Font.font(null, FontWeight.BOLD, 18));
+
+	exit = new Text();
+	exit.setCache(true);
+	exit.setX(10.0f);
+	exit.setY(100.0f);
+	exit.setFill(Color.INDIANRED);
+	exit.setText("EXIT");
+	exit.setFont(Font.font(null, FontWeight.BOLD, 18));
+
+	
     }
 
     public void setGamesLayer() {
@@ -120,4 +136,33 @@ public class WelcomeScreen extends BorderPane  {
 	    gameOne.setUnderline(true);
 	}
     }
+
+    public void turnExitBold() {
+	if(gameOne.isUnderline() || gameTwo.isUnderline()) {
+	    gameOne.setUnderline(false);
+	    gameTwo.setUnderline(false);
+	    exit.setUnderline(true);
+	} else {
+	    gameOne.setUnderline(true);
+	    exit.setUnderline(false);
+	}
+    }
+
+    public void performEnter() {
+	if(exit.isUnderline()) {
+	    Platform.exit();
+	}
+    }
+
+    public EventHandler<? super KeyEvent> createWelcomeKeyHandler() {
+	return event -> {
+	    if(event.getCode() == KeyCode.UP) turnBold();
+	    if(event.getCode() == KeyCode.DOWN) turnBold();
+	    if(event.getCode() == KeyCode.RIGHT) turnExitBold();
+	    if(event.getCode() == KeyCode.LEFT) turnExitBold();
+	    if(event.getCode() == KeyCode.ENTER) performEnter();
+	};
+    }
+
+    
 }

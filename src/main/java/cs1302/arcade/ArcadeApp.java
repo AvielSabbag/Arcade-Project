@@ -76,12 +76,13 @@ public class ArcadeApp extends Application {
 
 	
 	WelcomeScreen newWelcome = new WelcomeScreen();
-       
+	newWelcome.setOnKeyPressed(newWelcome.createWelcomeKeyHandler());
 	Scene scene = new Scene(newWelcome, 640, 480);	
 	stage.setTitle("testing");
 	stage.setScene(scene);
 	stage.sizeToScene();
 	stage.show();
+	newWelcome.requestFocus();
     } // start
 
 } // ArcadeApp
