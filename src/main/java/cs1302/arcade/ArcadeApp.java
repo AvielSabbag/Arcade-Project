@@ -13,7 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import cs1302.arcade.welcomeScreen.*;
-
+import cs1302.arcade.frogger.*;
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -74,12 +74,15 @@ public class ArcadeApp extends Application {
         group.requestFocus();
 	*/
 
-	
+	//testing welcomeScreen
 	WelcomeScreen newWelcome = new WelcomeScreen();
 	newWelcome.setOnKeyPressed(newWelcome.createWelcomeKeyHandler());
-	Scene scene = new Scene(newWelcome, 640, 480);	
+	Scene scene = new Scene(newWelcome, 640, 480);
+	//testing levelOne
+	LevelOneMap newLevel1 = new LevelOneMap();
+	Scene scene2 = new Scene(newLevel1, 640, 480);
 	stage.setTitle("testing");
-	stage.setScene(scene);
+	stage.setScene(scene2);
 	stage.sizeToScene();
 	stage.show();
 	newWelcome.requestFocus();
