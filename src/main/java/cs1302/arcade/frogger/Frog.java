@@ -31,10 +31,10 @@ public class Frog extends ImageView {
     public EventHandler<? super KeyEvent> createKeyHandler() {
 	this.setFocusTraversable(true);
 	return event -> {
-	    if(event.getCode() == KeyCode.LEFT) this.setX(this.getX() - 15.0);
-	    if(event.getCode() == KeyCode.RIGHT) this.setX(this.getX() + 15.0);
-	    if(event.getCode() == KeyCode.UP) this.setY(this.getY() - 15.0);
-	    if(event.getCode() == KeyCode.DOWN) this.setY(this.getY() + 15.0);
+	    if(event.getCode() == KeyCode.LEFT &&this.getX() > 10) this.setX(this.getX() - 15.0);
+	    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550) this.setX(this.getX() + 15.0);
+	    if(event.getCode() == KeyCode.UP && this.getY() > 10) this.setY(this.getY() - 15.0);
+	    if(event.getCode() == KeyCode.DOWN && this.getY() < 400) this.setY(this.getY() + 15.0);
 	};
     }
 }
