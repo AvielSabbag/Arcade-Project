@@ -80,12 +80,14 @@ public class ArcadeApp extends Application {
 	Scene scene = new Scene(newWelcome, 640, 480);
 	//testing levelOne
 	LevelOneMap newLevel1 = new LevelOneMap();
+	newLevel1.setOnKeyPressed(newLevel1.getFrog().createKeyHandler());
 	Scene scene2 = new Scene(newLevel1, 640, 480);
 	stage.setTitle("testing");
 	stage.setScene(scene2);
 	stage.sizeToScene();
 	stage.show();
 	newWelcome.requestFocus();
+	newLevel1.requestFocus();
     } // start
 
 } // ArcadeApp
