@@ -14,23 +14,42 @@ import javafx.scene.effect.*;
 import javafx.scene.input.*;
 import javafx.animation.*;
 import javafx.util.*;
+import java.util.*;
 
-public class LevelOneMap extends StackPane {
+public class LevelOneMap extends Group {
     private ImageView grass;
     private Rectangle road1;
     private Rectangle road2;
+    private VBox fullLayer;
+    private HBox scoreLayer;
+    private Text score;
+    private Text level1;
+    private Text lives;
+    private int scoreNum;
+    private int livesNum;
     private VBox roadLayer;
     private Pane frogLayer;
     private Pane carLayer;
     private Frog pepe;
+    private Car topCar;
+    private Car bottomCar;
+    private Timeline timeline;
+    private StackPane stack;
     
     public LevelOneMap() {
 	super();
 	setImages();
-	setVbox();
-	this.getChildren().addAll(grass, roadLayer, frogLayer, carLayer);
+	setRoads();
+	setScoreBar();
+	fullLayer = new VBox();
+	stack = new StackPane();
+	stack.getChildren().addAll(grass, roadLayer, frogLayer, carLayer);
+	fullLayer.getChildren().addAll(scoreLayer, stack);
+	timeline = new Timeline();
 	spawnCarBottom();
 	spawnCarTop();
+	checkCollisions();
+	this.getChildren().add(fullLayer);
     }//LevelOneMap
     public void setImages() {
 	grass = new ImageView(new Image("frogger/grass.png"));
@@ -41,10 +60,28 @@ public class LevelOneMap extends StackPane {
 	pepe = new Frog();
 	frogLayer.getChildren().add(pepe);
 	pepe.setX(300);
-	pepe.setY(400);
+	pepe.setY(450);
+	topCar = new Car(125.0);
+	bottomCar = new Car(355.0);
+	carLayer.getChildren().addAll(topCar, bottomCar);
     }
-
-    public void setVbox() {
+    
+    public void setScoreBar() {
+	scoreLayer = new HBox();
+	scoreLayer.setPrefWidth(75);
+	scoreNum = 0;
+	livesNum = 3;
+	score = new Text("Score: " + scoreNum);
+	level1 = new Text("LEVEL ONE");
+	lives = new Text("Lives: " + livesNum);
+	scoreLayer.getChildren().addAll(score, level1, lives);
+	score.setTextAlignment(TextAlignment.LEFT);
+	lives.setTextAlignment(TextAlignment.RIGHT);
+	level1.setTextAlignment(TextAlignment.CENTER);
+	scoreLayer.setSpacing(200.0);
+    }
+    
+    public void setRoads() {
 	roadLayer = new VBox(150);
 	roadLayer.setPadding(new Insets(100, 0, 100, 0));
 	roadLayer.getChildren().addAll(road1, road2);
@@ -55,26 +92,55 @@ public class LevelOneMap extends StackPane {
     }
 
     public void spawnCarBottom() {
-	EventHandler<ActionEvent> handler = event -> {
-	    Car c1 = new Car(340.0);
-	    carLayer.getChildren().add(c1);
-	    c1.runCar();
+	/*	EventHandler<ActionEvent> handler = event -> {
+	    if(bottomCarCount > 1) {
+		bottomCarCount = 0;
+	    }
+	    bottomCarGroup.get(bottomCarCount).runCar();
+	    bottomCarCount++;
+	    
 	};
-	KeyFrame keyFrame = new KeyFrame(Duration.seconds(2.5), handler);
-	Timeline timeline = new Timeline();
-	timeline.setCycleCount(Timeline.INDEFINITE);
-	timeline.getKeyFrames().add(keyFrame);
-	timeline.play();
+	KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.5), handler);
+	timeline.setCycleCount(2);
+	timeline.getKeyFrames().add(keyFrame);*/
+	bottomCar.runCar();
     }
 
     public void spawnCarTop() {
-	EventHandler<ActionEvent> handler = event -> {
-	    Car c1 = new Car(110.0);
-	    carLayer.getChildren().add(c1);
-	    c1.runCar();
+	/*EventHandler<ActionEvent> handler = event -> {
+	    if(topCarCount > 1) {
+		topCarCount = 0;
+	    }
+	    topCarGroup.get(topCarCount).runCar();
+	    topCarCount++;
+	    
 	};
-	KeyFrame keyFrame = new KeyFrame(Duration.seconds(2.5), handler);
-	Timeline timeline = new Timeline();
+	KeyFrame keyFrame = new KeyFrame(Duration.seconds(3.5), handler);
+	timeline.setCycleCount(2);
+	timeline.getKeyFrames().add(keyFrame);*/
+	topCar.runCar();
+    }
+
+    public void checkCollisions() {
+	EventHandler<ActionEvent> handler = event -> {
+	    if(pepe.getBoundsInParent().intersects(bottomCar.getBoundsInParent()) ||
+	       pepe.getBoundsInParent().intersects(topCar.getBoundsInParent()) ) {
+		pepe.setX(300);
+		pepe.setY(450);
+		livesNum--;
+		lives.setText("Lives: " + livesNum);
+	    }
+	    if(pepe.getY() < 100) {
+		System.out.println("YOU WIN");//Change to win screen
+	    }
+	    
+	    if(pepe.getBoundsInParent().intersects(road1.getBoundsInParent()) ||
+	       pepe.getBoundsInParent().intersects(road2.getBoundsInParent())) {
+		scoreNum += 2;
+		score.setText("Score: " + scoreNum);
+	    }
+	};
+	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
 	timeline.setCycleCount(Timeline.INDEFINITE);
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();

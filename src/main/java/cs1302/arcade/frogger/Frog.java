@@ -31,10 +31,14 @@ public class Frog extends ImageView {
     public EventHandler<? super KeyEvent> createKeyHandler() {
 	this.setFocusTraversable(true);
 	return event -> {
-	    if(event.getCode() == KeyCode.LEFT &&this.getX() > 10) this.setX(this.getX() - 15.0);
-	    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550) this.setX(this.getX() + 15.0);
-	    if(event.getCode() == KeyCode.UP && this.getY() > 10) this.setY(this.getY() - 15.0);
-	    if(event.getCode() == KeyCode.DOWN && this.getY() < 400) this.setY(this.getY() + 15.0);
+	    Thread t = new Thread(() -> {
+		    if(event.getCode() == KeyCode.LEFT && this.getX() > 10) Platform.runLater(() -> {this.setX(this.getX() - 15.0);});
+		    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550) Platform.runLater(() -> {this.setX(this.getX() + 15.0);});
+		    if(event.getCode() == KeyCode.UP && this.getY() > 10) Platform.runLater(() -> {this.setY(this.getY() - 15.0);});
+		    if(event.getCode() == KeyCode.DOWN && this.getY() < 450) Platform.runLater(() -> {this.setY(this.getY() + 15.0);});
+	    });
+	    t.setDaemon(true);
+	    t.start();
 	};
     }
 }

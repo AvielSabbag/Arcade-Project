@@ -19,6 +19,7 @@ import javafx.util.*;
 public class Car extends ImageView {
     private Image[] allCars;
     private Random ran = new Random();
+    private Timeline timeline2;
     
     public Car(Double y) {
 	super();
@@ -26,6 +27,7 @@ public class Car extends ImageView {
 	this.setImage(allCars[ran.nextInt(3)]);
 	this.setY(y);
 	this.setX(650);
+	timeline2 = new Timeline();
     }
 
     public void setImages() {
@@ -38,15 +40,21 @@ public class Car extends ImageView {
     public void runCar() {
 	EventHandler<ActionEvent> handler = event -> {
 	    Thread t = new Thread(() -> {
-		    Platform.runLater(() -> this.setX(this.getX() - 2));
+		    if(this.getX() < 0) {
+			this.setX(650);
+		    } else {
+			Platform.runLater(() -> this.setX(this.getX() - 6));
+		    }
 	    });
 	    t.setDaemon(true);
 	    t.start();
+	    
 	};
+	
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
-	Timeline timeline = new Timeline();
-	timeline.setCycleCount(Timeline.INDEFINITE);
-	timeline.getKeyFrames().add(keyFrame);
-	timeline.play();
+	timeline2.setCycleCount(Timeline.INDEFINITE);
+	timeline2.getKeyFrames().add(keyFrame);
+	timeline2.play();
+	
     }//runCar
 }

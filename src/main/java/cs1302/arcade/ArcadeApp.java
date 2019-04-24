@@ -77,11 +77,11 @@ public class ArcadeApp extends Application {
 	//testing welcomeScreen
 	WelcomeScreen newWelcome = new WelcomeScreen();
 	newWelcome.setOnKeyPressed(newWelcome.createWelcomeKeyHandler());
-	Scene scene = new Scene(newWelcome, 640, 480);
+	Scene scene = new Scene(newWelcome, 640, 520);
 	//testing levelOne
 	LevelOneMap newLevel1 = new LevelOneMap();
 	newLevel1.setOnKeyPressed(newLevel1.getFrog().createKeyHandler());
-	Scene scene2 = new Scene(newLevel1, 640, 480);
+	Scene scene2 = new Scene(newLevel1, 640, 520);
 	stage.setTitle("testing");
 	stage.setScene(scene2);
 	stage.sizeToScene();
