@@ -2,15 +2,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Tile extends ImageView{
-	int x;
-	int y;
-	int value;
+	private int x;
+	private int y;
+	private int value;
+	private boolean isMerged = false;
 	public Tile(int x, int y, int value) {
 		super();
 		this.x = x;
 		this.y = y;
 		setValue(value);
-		this.relocate(this.x, this.y);
+		this.setYCoord(y);
+		this.setXCoord(x);
 	}
 	public int getValue() {
 		return value;
@@ -27,10 +29,16 @@ public class Tile extends ImageView{
 	}
 	public void setXCoord(int x) {
 		this.x = x;
-		this.setTranslateX(x);
+		this.setX(x);
 	}
 	public void setYCoord(int y) {
 		this.y = y;
-		this.setTranslateY(y);
+		this.setY(y);
+	}
+	public boolean isMerged() {
+		return this.isMerged;
+	}
+	public void setMerged(boolean isMerged) {
+		this.isMerged = isMerged;
 	}
 }
