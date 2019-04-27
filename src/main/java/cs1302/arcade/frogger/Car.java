@@ -32,25 +32,21 @@ public class Car extends ImageView {
 
     public void setImages() {
 	allCars = new Image[3];
-	allCars[0] = new Image("frogger/blueCar.png", 75, 75, true, true);
-	allCars[1] = new Image("frogger/greenCar.png", 75, 75, true, true);
-	allCars[2] = new Image("frogger/redCar.png", 75, 75, true, true);
+	allCars[0] = new Image("frogger/blueCar.png", 100, 100, true, true);
+	allCars[1] = new Image("frogger/greenCar.png", 100, 100, true, true);
+	allCars[2] = new Image("frogger/redCar.png", 100, 100, true, true);
     }//setImages
 
-    public void runCar() {
+    public void runCar(int speed) {
 	EventHandler<ActionEvent> handler = event -> {
-	    Thread t = new Thread(() -> {
-		    if(this.getX() < 0) {
-			this.setX(650);
-		    } else {
-			Platform.runLater(() -> this.setX(this.getX() - 6));
-		    }
-	    });
-	    t.setDaemon(true);
-	    t.start();
-	    
+	    if(this.getX() < 0) {
+		this.setX(650);
+	    } else {
+		this.setX(this.getX() - speed);
+	    }
 	};
-	
+
+    
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
 	timeline2.setCycleCount(Timeline.INDEFINITE);
 	timeline2.getKeyFrames().add(keyFrame);

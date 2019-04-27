@@ -25,6 +25,8 @@ public class WelcomeScreen extends BorderPane  {
     private Text title;
     private Text names;
     private Text exit;
+    private boolean gameOneSelect;
+    private boolean gameTwoSelect;
 
     public WelcomeScreen() {
 	super();
@@ -32,6 +34,8 @@ public class WelcomeScreen extends BorderPane  {
 	setTitleLayer();
 	setGamesLayer();
 	setStack();
+	gameOneSelect = false;
+	gameTwoSelect = true;
 	this.setCenter(stack);
     }
     public void setRect() {
@@ -152,6 +156,10 @@ public class WelcomeScreen extends BorderPane  {
 	if(exit.isUnderline()) {
 	    Platform.exit();
 	}
+	if(gameOne.isUnderline()) {
+	    gameOneSelect = true;
+	}
+	    
     }
 
     public EventHandler<? super KeyEvent> createWelcomeKeyHandler() {
@@ -164,5 +172,15 @@ public class WelcomeScreen extends BorderPane  {
 	};
     }
 
+    public boolean getSelect(int i) {
+	if(i == 1) return gameOneSelect;
+	if(i == 2) return gameTwoSelect;
+	else return false;
+    }
+
+    public void resetSelect() {
+	gameOneSelect = false;
+	gameTwoSelect = false;
+    }
     
 }

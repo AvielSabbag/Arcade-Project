@@ -16,7 +16,7 @@ import javafx.animation.*;
 import javafx.util.*;
 import java.util.*;
 
-public class LevelOneMap extends Group {
+public class LevelTwoMap extends Group {
     private ImageView grass;
     private Rectangle road1;
     private Rectangle road2;
@@ -35,16 +35,14 @@ public class LevelOneMap extends Group {
     private Car bottomCar;
     private Timeline timeline;
     private StackPane stack;
-    private boolean win;
     
-    public LevelOneMap() {
+    public LevelTwoMap(LevelOneMap lvl) {
 	super();
 	setImages();
 	setRoads();
-	setScoreBar();
+	setScoreBar(lvl);
 	fullLayer = new VBox();
 	stack = new StackPane();
-	win = false;
 	stack.getChildren().addAll(grass, roadLayer, frogLayer, carLayer);
 	fullLayer.getChildren().addAll(scoreLayer, stack);
 	timeline = new Timeline();
@@ -68,13 +66,13 @@ public class LevelOneMap extends Group {
 	carLayer.getChildren().addAll(topCar, bottomCar);
     }
     
-    public void setScoreBar() {
+    public void setScoreBar(LevelOneMap lvl) {
 	scoreLayer = new HBox();
 	scoreLayer.setPrefWidth(75);
-	scoreNum = 0;
-	livesNum = 3;
+	scoreNum = lvl.getScore();
+	livesNum = lvl.getLives();
 	score = new Text("Score: " + scoreNum);
-	level1 = new Text("LEVEL ONE");
+	level1 = new Text("LEVEL TWO");
 	lives = new Text("Lives: " + livesNum);
 	scoreLayer.getChildren().addAll(score, level1, lives);
 	score.setTextAlignment(TextAlignment.LEFT);
@@ -94,11 +92,11 @@ public class LevelOneMap extends Group {
     }
 
     public void spawnCarBottom() {
-	bottomCar.runCar(6);
+	bottomCar.runCar(11);
     }
 
     public void spawnCarTop() {
-	topCar.runCar(6);
+	topCar.runCar(11);
     }
 
     public void checkCollisions() {
@@ -111,7 +109,7 @@ public class LevelOneMap extends Group {
 		lives.setText("Lives: " + livesNum);
 	    }
 	    if(pepe.getY() < 100) {
-		win = true;;//Change to win screen
+		System.out.println("YOU WIN");//Change to win screen
 	    }
 	    
 	    if(pepe.getBoundsInParent().intersects(road1.getBoundsInParent()) ||
@@ -125,26 +123,4 @@ public class LevelOneMap extends Group {
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
-
-    public int getScore() {
-	return scoreNum;
-    }
-
-    public int getLives() {
-	return livesNum;
-    }
-
-    public boolean getWin() {
-	return win;
-    }
-
-    public void resetStats() {
-	scoreNum = 0;
-	score.setText("Score: " + scoreNum);
-	livesNum = 3;
-	lives.setText("Score: " + livesNum);
-	win = false;
-    }
 }
-    
-	
