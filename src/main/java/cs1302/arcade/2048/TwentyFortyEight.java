@@ -33,8 +33,7 @@ public class TwentyFortyEight extends Application{
 		stage.setTitle("2048");
 		stage.setScene(scene);
 		stage.show();
-		
-
+		scene.setOnKeyPressed(root::handleKey);
 	}
 	private void menuStuff() {
 		menuBar = new MenuBar();
