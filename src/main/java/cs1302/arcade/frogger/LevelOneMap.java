@@ -36,9 +36,10 @@ public class LevelOneMap extends Group {
     private Timeline timeline;
     private StackPane stack;
     private boolean win;
-    
+        
     public LevelOneMap() {
 	super();
+	timeline = new Timeline();
 	setImages();
 	setRoads();
 	setScoreBar();
@@ -47,7 +48,6 @@ public class LevelOneMap extends Group {
 	win = false;
 	stack.getChildren().addAll(grass, roadLayer, frogLayer, carLayer);
 	fullLayer.getChildren().addAll(scoreLayer, stack);
-	timeline = new Timeline();
 	spawnCarBottom();
 	spawnCarTop();
 	checkCollisions();
@@ -63,8 +63,8 @@ public class LevelOneMap extends Group {
 	frogLayer.getChildren().add(pepe);
 	pepe.setX(300);
 	pepe.setY(450);
-	topCar = new Car(125.0);
-	bottomCar = new Car(355.0);
+	topCar = new Car(125.0, timeline);
+	bottomCar = new Car(355.0, timeline);
 	carLayer.getChildren().addAll(topCar, bottomCar);
     }
     
@@ -110,7 +110,7 @@ public class LevelOneMap extends Group {
 		livesNum--;
 		lives.setText("Lives: " + livesNum);
 	    }
-	    if(pepe.getY() < 100) {
+	    if(pepe.getY() < 25) {
 		win = true;;//Change to win screen
 	    }
 	    
@@ -142,8 +142,15 @@ public class LevelOneMap extends Group {
 	scoreNum = 0;
 	score.setText("Score: " + scoreNum);
 	livesNum = 3;
-	lives.setText("Score: " + livesNum);
+	lives.setText("Lives: " + livesNum);
 	win = false;
+	pepe.setX(300);
+	pepe.setY(450);
+	pepe.setQuit(false);
+    }
+
+    public Timeline getTimeline() {
+	return timeline;
     }
 }
     

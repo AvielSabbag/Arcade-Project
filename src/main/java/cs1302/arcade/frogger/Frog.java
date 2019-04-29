@@ -17,9 +17,10 @@ public class Frog extends ImageView {
     private Image pepe;
     private Double xCor;
     private Double yCor;
-
+    private boolean quit;
     public Frog() {
 	super();
+	quit = false;
 	pepe = new Image("frogger/pixel_Pepe.jpg", 75, 75, true, true);
 	xCor = 40.0;
 	yCor = 60.0;
@@ -36,9 +37,18 @@ public class Frog extends ImageView {
 		    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550) Platform.runLater(() -> {this.setX(this.getX() + 15.0);});
 		    if(event.getCode() == KeyCode.UP && this.getY() > 10) Platform.runLater(() -> {this.setY(this.getY() - 15.0);});
 		    if(event.getCode() == KeyCode.DOWN && this.getY() < 450) Platform.runLater(() -> {this.setY(this.getY() + 15.0);});
+		    if(event.getCode() == KeyCode.Q) quit = true;
 	    });
 	    t.setDaemon(true);
 	    t.start();
 	};
+    }//createKeyHandler
+
+    public boolean getQuit() {
+	return quit;
+    }//getQuit
+
+    public void setQuit(boolean q) {
+	quit = q;
     }
 }

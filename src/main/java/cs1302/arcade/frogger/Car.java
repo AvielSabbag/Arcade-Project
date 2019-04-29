@@ -19,15 +19,15 @@ import javafx.util.*;
 public class Car extends ImageView {
     private Image[] allCars;
     private Random ran = new Random();
-    private Timeline timeline2;
+    private Timeline timeline;
     
-    public Car(Double y) {
+    public Car(Double y, Timeline t) {
 	super();
 	setImages();
 	this.setImage(allCars[ran.nextInt(3)]);
 	this.setY(y);
 	this.setX(650);
-	timeline2 = new Timeline();
+	timeline = t;
     }
 
     public void setImages() {
@@ -48,9 +48,9 @@ public class Car extends ImageView {
 
     
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
-	timeline2.setCycleCount(Timeline.INDEFINITE);
-	timeline2.getKeyFrames().add(keyFrame);
-	timeline2.play();
+	timeline.setCycleCount(Timeline.INDEFINITE);
+	timeline.getKeyFrames().add(keyFrame);
+	timeline.play();
 	
     }//runCar
 }

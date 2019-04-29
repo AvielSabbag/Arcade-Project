@@ -35,17 +35,19 @@ public class LevelTwoMap extends Group {
     private Car bottomCar;
     private Timeline timeline;
     private StackPane stack;
+    private boolean win;
     
-    public LevelTwoMap(LevelOneMap lvl) {
+    public LevelTwoMap() {
 	super();
+	timeline = new Timeline();
 	setImages();
 	setRoads();
-	setScoreBar(lvl);
+	setScoreBar();
 	fullLayer = new VBox();
 	stack = new StackPane();
+	win = false;
 	stack.getChildren().addAll(grass, roadLayer, frogLayer, carLayer);
 	fullLayer.getChildren().addAll(scoreLayer, stack);
-	timeline = new Timeline();
 	spawnCarBottom();
 	spawnCarTop();
 	checkCollisions();
@@ -61,16 +63,16 @@ public class LevelTwoMap extends Group {
 	frogLayer.getChildren().add(pepe);
 	pepe.setX(300);
 	pepe.setY(450);
-	topCar = new Car(125.0);
-	bottomCar = new Car(355.0);
+	topCar = new Car(125.0, timeline);
+	bottomCar = new Car(355.0, timeline);
 	carLayer.getChildren().addAll(topCar, bottomCar);
     }
     
-    public void setScoreBar(LevelOneMap lvl) {
+    public void setScoreBar() {
 	scoreLayer = new HBox();
 	scoreLayer.setPrefWidth(75);
-	scoreNum = lvl.getScore();
-	livesNum = lvl.getLives();
+	scoreNum = 0;
+	livesNum = 3;
 	score = new Text("Score: " + scoreNum);
 	level1 = new Text("LEVEL TWO");
 	lives = new Text("Lives: " + livesNum);
@@ -92,11 +94,11 @@ public class LevelTwoMap extends Group {
     }
 
     public void spawnCarBottom() {
-	bottomCar.runCar(11);
+	bottomCar.runCar(10);
     }
 
     public void spawnCarTop() {
-	topCar.runCar(11);
+	topCar.runCar(10);
     }
 
     public void checkCollisions() {
@@ -108,8 +110,8 @@ public class LevelTwoMap extends Group {
 		livesNum--;
 		lives.setText("Lives: " + livesNum);
 	    }
-	    if(pepe.getY() < 100) {
-		System.out.println("YOU WIN");//Change to win screen
+	    if(pepe.getY() < 25) {
+		win = true;//Change to win screen
 	    }
 	    
 	    if(pepe.getBoundsInParent().intersects(road1.getBoundsInParent()) ||
@@ -123,4 +125,36 @@ public class LevelTwoMap extends Group {
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
+
+    public int getScore() {
+	return scoreNum;
+    }
+
+    public int getLives() {
+	return livesNum;
+    }
+
+    public boolean getWin() {
+	return win;
+    }
+    public void setStats(LevelOneMap lvl1) {
+	scoreNum = lvl1.getScore();
+	score.setText("Score: " + scoreNum);
+	livesNum = lvl1.getLives();
+	lives.setText("Lives: " + livesNum);
+    }
+    public void resetStats() {
+	scoreNum = 0;
+	score.setText("Score: " + scoreNum);
+	livesNum = 3;
+	lives.setText("Lives: " + livesNum);
+	pepe.setX(300);
+	pepe.setY(450);
+	win = false;
+    }
+
+    public Timeline getTimeline() {
+	return timeline;
+    }
 }
+    
