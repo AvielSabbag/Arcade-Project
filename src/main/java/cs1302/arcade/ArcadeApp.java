@@ -26,6 +26,7 @@ public class ArcadeApp extends Application {
     WelcomeScreen newWelcome;
     LevelOneMap newLevel1;
     LevelTwoMap newLevel2;
+    LevelThreeMap newLevel3;
     Timeline timelineW = new Timeline();
     Timeline timeline1 = new Timeline();
     Timeline timeline2 = new Timeline();
@@ -103,6 +104,8 @@ public class ArcadeApp extends Application {
 	newLevel1.setOnKeyPressed(newLevel1.getFrog().createKeyHandler());
 	newLevel2 = new LevelTwoMap();
 	newLevel2.setOnKeyPressed(newLevel2.getFrog().createKeyHandler());
+	newLevel3 = new LevelThreeMap();
+	newLevel3.setOnKeyPressed(newLevel3.getFrog().createKeyHandler());
 	s = new Scene(newWelcome, 640, 520);
 	setTimelineW();
 	setTimeline1();
@@ -129,11 +132,16 @@ public class ArcadeApp extends Application {
 	timeline2.play();
     }//checkForWins2
 
+    public void checkForWinsLosses3() {
+	timeline3.play();
+    }
+    
     public void setTimelineW() {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(newWelcome.getSelect(1)) {
 		newLevel1.resetStats();
 		newLevel2.resetStats();
+		newLevel3.resetStats();
 		s.setRoot(newLevel1);
 		checkForWinsLosses1();
 		timelineW.pause();
@@ -155,7 +163,6 @@ public class ArcadeApp extends Application {
 	    }
 	    if(newLevel1.getLives() <= 0) {
 		newWelcome.resetSelect();
-		newLevel1.resetStats();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
@@ -163,7 +170,6 @@ public class ArcadeApp extends Application {
 	    }
 	    if(newLevel1.getFrog().getQuit()) {
 		newWelcome.resetSelect();
-		newLevel1.resetStats();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
@@ -179,12 +185,14 @@ public class ArcadeApp extends Application {
     public void setTimeline2() {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(newLevel2.getWin()) {
-		System.out.println("YOU WIN");//change to next level
+		newLevel3.setStats(newLevel2);
+		s.setRoot(newLevel3);
+		checkForWinsLosses3();
+		newLevel2.resetStats();
+		timeline2.pause();
 	    }
 	    if(newLevel2.getLives() <= 0) {
 		newWelcome.resetSelect();
-		newLevel1.resetStats();
-		newLevel2.resetStats();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
@@ -192,7 +200,6 @@ public class ArcadeApp extends Application {
 	    }
 	     if(newLevel2.getFrog().getQuit()) {
 		newWelcome.resetSelect();
-		newLevel2.resetStats();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
@@ -204,4 +211,30 @@ public class ArcadeApp extends Application {
 	timeline2.setCycleCount(Timeline.INDEFINITE);
 	timeline2.getKeyFrames().add(keyFrame);
     }//setTimeline2
+
+    public void setTimeline3() {
+	EventHandler<ActionEvent> handler = event -> {
+	    if(newLevel3.getWin()) {
+		System.out.println("YOU WIN");
+	    }
+	    if(newLevel3.getLives() <= 0) {
+		newWelcome.resetSelect();
+		s.setRoot(newWelcome);
+		newWelcome.requestFocus();
+		checkForWelcomeScreen();
+		timeline3.pause();
+	    }
+	    if(newLevel3.getFrog().getQuit()) {
+		newWelcome.resetSelect();
+		s.setRoot(newWelcome);
+		newWelcome.requestFocus();
+		checkForWelcomeScreen();
+		timeline3.pause();
+	    }
+	};
+	
+	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
+	timeline3.setCycleCount(Timeline.INDEFINITE);
+	timeline3.getKeyFrames().add(keyFrame);
+    }
 } // ArcadeApp
