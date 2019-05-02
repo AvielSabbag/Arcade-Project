@@ -38,9 +38,9 @@ public class LevelOneMap extends Group {
     private StackPane stack;
     private boolean win;
         
-    public LevelOneMap() {
+    public LevelOneMap(Timeline t) {
 	super();
-	timeline = new Timeline();
+	timeline = t;
 	setImages();
 	setRoads();
 	setScoreBar();

@@ -37,10 +37,11 @@ public class LevelThreeMap extends Group {
     private StackPane stack;
     private boolean win;
     private Bird bibi;
+    private Bird bobo;
     
-    public LevelThreeMap() {
+    public LevelThreeMap(Timeline t) {
 	super();
-	timeline = new Timeline();
+	timeline = t;
 	setImages();
 	setRoads();
 	setScoreBar();
@@ -52,6 +53,7 @@ public class LevelThreeMap extends Group {
 	spawnCarBottom();
 	spawnCarTop();
 	bibi.runBird();
+	bobo.runBird();
 	checkCollisions();
 	this.getChildren().add(fullLayer);
     }//LevelOneMap
@@ -62,13 +64,14 @@ public class LevelThreeMap extends Group {
 	frogLayer = new Pane();
 	carLayer = new Pane();
 	pepe = new Frog();
-	bibi = new Bird(timeline);
+	bibi = new Bird(100.0, timeline);
+	bobo = new Bird(500.0, timeline);
 	frogLayer.getChildren().add(pepe);
 	pepe.setX(300);
 	pepe.setY(450);
 	topCar = new Car(125.0, timeline);
 	bottomCar = new Car(355.0, timeline);
-	carLayer.getChildren().addAll(topCar, bottomCar, bibi);
+	carLayer.getChildren().addAll(bibi, bobo, topCar, bottomCar);
     }
     
     public void setScoreBar() {
@@ -122,10 +125,13 @@ public class LevelThreeMap extends Group {
 		scoreNum += 2;
 		score.setText("Score: " + scoreNum);
 	    }
-	    if(pepe.getBoundsInParent().intersects(bibi.getBoundsInParent())) {
-		    livesNum--;
-		    lives.setText("Lives: " + livesNum);
-		}
+	    if(pepe.getBoundsInParent().intersects(bibi.getBoundsInParent())||
+	       pepe.getBoundsInParent().intersects(bobo.getBoundsInParent())) {
+		pepe.setX(300);
+		pepe.setY(450);
+		livesNum--;
+		lives.setText("Lives: " + livesNum);
+	    }
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
 	timeline.setCycleCount(Timeline.INDEFINITE);

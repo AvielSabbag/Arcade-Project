@@ -100,11 +100,11 @@ public class ArcadeApp extends Application {
 	*/
 	newWelcome = new WelcomeScreen();
 	newWelcome.setOnKeyPressed(newWelcome.createWelcomeKeyHandler());
-	newLevel1 = new LevelOneMap();
+	newLevel1 = new LevelOneMap(timeline1);
 	newLevel1.setOnKeyPressed(newLevel1.getFrog().createKeyHandler());
-	newLevel2 = new LevelTwoMap();
+	newLevel2 = new LevelTwoMap(timeline2);
 	newLevel2.setOnKeyPressed(newLevel2.getFrog().createKeyHandler());
-	newLevel3 = new LevelThreeMap();
+	newLevel3 = new LevelThreeMap(timeline3);
 	newLevel3.setOnKeyPressed(newLevel3.getFrog().createKeyHandler());
 	s = new Scene(newWelcome, 640, 520);
 	setTimelineW();
@@ -144,7 +144,7 @@ public class ArcadeApp extends Application {
 		newLevel3.resetStats();
 		s.setRoot(newLevel1);
 		checkForWinsLosses1();
-		timelineW.pause();
+		timelineW.stop();
 	    }
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
@@ -159,21 +159,21 @@ public class ArcadeApp extends Application {
 		s.setRoot(newLevel2);
 		checkForWinsLosses2();
 		newLevel1.resetStats();
-		timeline1.pause();
+		timeline1.stop();
 	    }
 	    if(newLevel1.getLives() <= 0) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline1.pause();
+		timeline1.stop();
 	    }
 	    if(newLevel1.getFrog().getQuit()) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline1.pause();
+		timeline1.stop();
 	    }
 	};
 	
@@ -189,21 +189,21 @@ public class ArcadeApp extends Application {
 		s.setRoot(newLevel3);
 		checkForWinsLosses3();
 		newLevel2.resetStats();
-		timeline2.pause();
+		timeline2.stop();
 	    }
 	    if(newLevel2.getLives() <= 0) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline2.pause();
+		timeline2.stop();
 	    }
 	     if(newLevel2.getFrog().getQuit()) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline2.pause();
+		timeline2.stop();
 	    }
 	};
 	
@@ -222,19 +222,19 @@ public class ArcadeApp extends Application {
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline3.pause();
+		timeline3.stop();
 	    }
 	    if(newLevel3.getFrog().getQuit()) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
 		checkForWelcomeScreen();
-		timeline3.pause();
+		timeline3.stop();
 	    }
 	};
 	
-	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
+	KeyFrame keyFrame1 = new KeyFrame(Duration.millis(1000/60), handler);
 	timeline3.setCycleCount(Timeline.INDEFINITE);
-	timeline3.getKeyFrames().add(keyFrame);
+	timeline3.getKeyFrames().add(keyFrame1);
     }
 } // ArcadeApp

@@ -20,6 +20,7 @@ public class LevelTwoMap extends Group {
     private ImageView grass;
     private Rectangle road1;
     private Rectangle road2;
+    private Rectangle finishLine;
     private VBox fullLayer;
     private HBox scoreLayer;
     private Text score;
@@ -37,9 +38,9 @@ public class LevelTwoMap extends Group {
     private StackPane stack;
     private boolean win;
     
-    public LevelTwoMap() {
+    public LevelTwoMap(Timeline t) {
 	super();
-	timeline = new Timeline();
+	timeline = t;
 	setImages();
 	setRoads();
 	setScoreBar();
@@ -57,6 +58,8 @@ public class LevelTwoMap extends Group {
 	grass = new ImageView(new Image("frogger/grass.png"));
 	road1 = new Rectangle(640, 80, Color.BLACK);
 	road2 = new Rectangle(640, 80, Color.BLACK);
+	finishLine = new Rectangle(640, 10, Color.RED);
+	finishLine.setY(30);
 	frogLayer = new Pane();
 	carLayer = new Pane();
 	pepe = new Frog();
@@ -65,7 +68,7 @@ public class LevelTwoMap extends Group {
 	pepe.setY(450);
 	topCar = new Car(125.0, timeline);
 	bottomCar = new Car(355.0, timeline);
-	carLayer.getChildren().addAll(topCar, bottomCar);
+	carLayer.getChildren().addAll(topCar, bottomCar, finishLine);
     }
     
     public void setScoreBar() {
