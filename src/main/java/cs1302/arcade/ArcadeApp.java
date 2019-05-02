@@ -122,6 +122,7 @@ public class ArcadeApp extends Application {
 	newLevel1.requestFocus();
 	newLevel2.requestFocus();
 	newLevel3.requestFocus();
+	newWin.requestFocus();
 	checkForWelcomeScreen();		
     } // start
 
@@ -153,11 +154,16 @@ public class ArcadeApp extends Application {
 	    }
 
 	    if(newWin.getBack()) {
+		newLevel1.resetStats();
+		newLevel2.resetStats();
+		newLevel3.resetStats();
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
+		newWelcome.requestFocus();
 		newWin.resetSelect();
 	    }
 	};
+	
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
 	timelineW.setCycleCount(Timeline.INDEFINITE);
 	timelineW.getKeyFrames().add(0, keyFrame);
@@ -226,8 +232,10 @@ public class ArcadeApp extends Application {
     public void setTimeline3() {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(newLevel3.getWin()) {
+		newWelcome.resetSelect();
 		newWin.resetSelect();
 		s.setRoot(newWin);
+		newWin.requestFocus();
 		checkForWelcomeScreen();
 		timeline3.stop();
 	    }

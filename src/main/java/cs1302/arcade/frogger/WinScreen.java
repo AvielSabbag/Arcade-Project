@@ -18,7 +18,7 @@ public class WinScreen extends StackPane {
     private Rectangle rect;
     private VBox textLayer;
     private Text win;
-    private Text backtoMenu;
+    private Text backToMenu;
     private Boolean back;
     
     public WinScreen() {
@@ -53,12 +53,12 @@ public class WinScreen extends StackPane {
 	backToMenu.setX(10.0f);
 	backToMenu.setY(100.0f);
 	backToMenu.setFill(Color.INDIANRED);
-	backToMenu.setText("Press ENTER to return to welcome screen");
-	backToMenu.setFont(Font.font(null, FontWeight.Bold, 18));
+	backToMenu.setText("Press ENTER to return " + "\n" + "to welcome screen");
+	backToMenu.setFont(Font.font(null, FontWeight.BOLD, 18));
     }
     public void setVBox() {
 	textLayer = new VBox(10);
-	textLayer.setAlignemnt(Pos.CENTER);
+	textLayer.setAlignment(Pos.CENTER);
 	setText();
 	textLayer.getChildren().addAll(win, backToMenu);
     }
@@ -66,7 +66,7 @@ public class WinScreen extends StackPane {
     public EventHandler<? super KeyEvent> createWelcomeKeyHandler() {
 	return event -> {
 	    if(event.getCode() == KeyCode.ENTER) back = true;
-	}
+	};
     }
 
     public boolean getBack() {

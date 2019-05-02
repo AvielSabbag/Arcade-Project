@@ -38,7 +38,8 @@ public class LevelThreeMap extends Group {
     private boolean win;
     private Bird bibi;
     private Bird bobo;
-    
+    private Rectangle finishLine;
+
     public LevelThreeMap(Timeline t) {
 	super();
 	timeline = t;
@@ -61,6 +62,8 @@ public class LevelThreeMap extends Group {
 	grass = new ImageView(new Image("frogger/grass.png"));
 	road1 = new Rectangle(640, 80, Color.BLACK);
 	road2 = new Rectangle(640, 80, Color.BLACK);
+	finishLine = new Rectangle(640, 10, Color.RED);
+	finishLine.setY(30);
 	frogLayer = new Pane();
 	carLayer = new Pane();
 	pepe = new Frog();
@@ -71,7 +74,7 @@ public class LevelThreeMap extends Group {
 	pepe.setY(450);
 	topCar = new Car(125.0, timeline);
 	bottomCar = new Car(355.0, timeline);
-	carLayer.getChildren().addAll(bibi, bobo, topCar, bottomCar);
+	carLayer.getChildren().addAll(bibi, bobo, topCar, bottomCar, finishLine);
     }
     
     public void setScoreBar() {
