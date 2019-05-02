@@ -17,7 +17,6 @@ public class WelcomeScreen extends BorderPane  {
     
     private StackPane stack;
     private Rectangle rect;
-    private ImageView TitleScreen;
     private VBox titleLayer;
     private VBox gamesLayer;
     private Text gameOne;
@@ -38,14 +37,15 @@ public class WelcomeScreen extends BorderPane  {
 	gameTwoSelect = true;
 	this.setCenter(stack);
     }
+    
     public void setRect() {
 	Color rCol = Color.DARKSLATEBLUE;
 	rect = new Rectangle(400, 360, rCol);
 	Color sCol = Color.INDIANRED;
 	rect.setStroke(sCol);
 	rect.setStrokeWidth(5);
-
     }//setRect
+    
     public StackPane setStack() {
 	stack = new StackPane();
 	stack.setMaxSize(400, 360);

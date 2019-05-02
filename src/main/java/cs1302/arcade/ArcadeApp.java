@@ -27,6 +27,7 @@ public class ArcadeApp extends Application {
     LevelOneMap newLevel1;
     LevelTwoMap newLevel2;
     LevelThreeMap newLevel3;
+    WinScreen newWin;
     Timeline timelineW = new Timeline();
     Timeline timeline1 = new Timeline();
     Timeline timeline2 = new Timeline();
@@ -106,10 +107,13 @@ public class ArcadeApp extends Application {
 	newLevel2.setOnKeyPressed(newLevel2.getFrog().createKeyHandler());
 	newLevel3 = new LevelThreeMap(timeline3);
 	newLevel3.setOnKeyPressed(newLevel3.getFrog().createKeyHandler());
+	newWin = new WinScreen();
+	newWin.setOnKeyPressed(newWin.createWelcomeKeyHandler());
 	s = new Scene(newWelcome, 640, 520);
 	setTimelineW();
 	setTimeline1();
 	setTimeline2();
+	setTimeline3();
 	stage.setTitle("testing");
 	stage.setScene(s);
 	stage.sizeToScene();
@@ -117,6 +121,7 @@ public class ArcadeApp extends Application {
 	newWelcome.requestFocus();
 	newLevel1.requestFocus();
 	newLevel2.requestFocus();
+	newLevel3.requestFocus();
 	checkForWelcomeScreen();		
     } // start
 
@@ -145,6 +150,12 @@ public class ArcadeApp extends Application {
 		s.setRoot(newLevel1);
 		checkForWinsLosses1();
 		timelineW.stop();
+	    }
+
+	    if(newWin.getBack()) {
+		newWelcome.resetSelect();
+		s.setRoot(newWelcome);
+		newWin.resetSelect();
 	    }
 	};
 	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
@@ -215,7 +226,10 @@ public class ArcadeApp extends Application {
     public void setTimeline3() {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(newLevel3.getWin()) {
-		System.out.println("YOU WIN");
+		newWin.resetSelect();
+		s.setRoot(newWin);
+		checkForWelcomeScreen();
+		timeline3.stop();
 	    }
 	    if(newLevel3.getLives() <= 0) {
 		newWelcome.resetSelect();
@@ -233,8 +247,8 @@ public class ArcadeApp extends Application {
 	    }
 	};
 	
-	KeyFrame keyFrame1 = new KeyFrame(Duration.millis(1000/60), handler);
+	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
 	timeline3.setCycleCount(Timeline.INDEFINITE);
-	timeline3.getKeyFrames().add(keyFrame1);
+	timeline3.getKeyFrames().add(keyFrame);
     }
 } // ArcadeApp
