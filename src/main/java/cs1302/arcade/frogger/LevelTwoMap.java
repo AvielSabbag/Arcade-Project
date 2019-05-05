@@ -15,7 +15,9 @@ import javafx.scene.input.*;
 import javafx.animation.*;
 import javafx.util.*;
 import java.util.*;
-
+/**
+ *This class builds the first level of frogger
+ */
 public class LevelTwoMap extends Group {
     private ImageView grass;
     private Rectangle road1;
@@ -37,7 +39,10 @@ public class LevelTwoMap extends Group {
     private Timeline timeline;
     private StackPane stack;
     private boolean win;
-    
+    /**
+     *Constructor for first level
+     *@param t {@code Timeline} that the cars of the level run on
+     */
     public LevelTwoMap(Timeline t) {
 	super();
 	timeline = t;
@@ -54,6 +59,10 @@ public class LevelTwoMap extends Group {
 	checkCollisions();
 	this.getChildren().add(fullLayer);
     }//LevelOneMap
+     /**
+     *Sets all neccessary imageViews and shapes for the level
+     *
+     */
     public void setImages() {
 	grass = new ImageView(new Image("frogger/grass.png"));
 	road1 = new Rectangle(640, 80, Color.BLACK);
@@ -70,7 +79,9 @@ public class LevelTwoMap extends Group {
 	bottomCar = new Car(355.0, timeline);
 	carLayer.getChildren().addAll(topCar, bottomCar, finishLine);
     }
-    
+     /**
+     *Aligns score bar into the scene graph
+     */
     public void setScoreBar() {
 	scoreLayer = new HBox();
 	scoreLayer.setPrefWidth(75);
@@ -85,25 +96,37 @@ public class LevelTwoMap extends Group {
 	level1.setTextAlignment(TextAlignment.CENTER);
 	scoreLayer.setSpacing(200.0);
     }
-    
+    /**
+     *Aligns roads into the scene graph
+     */
     public void setRoads() {
 	roadLayer = new VBox(150);
 	roadLayer.setPadding(new Insets(100, 0, 100, 0));
 	roadLayer.getChildren().addAll(road1, road2);
     }
-
+    /**
+     *Returns the frog object of the level
+     *@return Frog current frog of the level
+     */
     public Frog getFrog() {
 	return pepe;
     }
-
+    /**
+     *Begins the bottom Car animation loop with a speed of 6 pixels/frame
+     */
     public void spawnCarBottom() {
 	bottomCar.runCar(10);
     }
-
+    /**
+     *Begins the top Car animation loop with a speed of 6 pixels/frame
+     */
     public void spawnCarTop() {
 	topCar.runCar(10);
     }
-
+    /**
+     *Sets the loop for checking for the frog hitting cars, the finish line, or in the road 
+     *collecting points
+     */
     public void checkCollisions() {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(pepe.getBoundsInParent().intersects(bottomCar.getBoundsInParent()) ||
@@ -128,24 +151,39 @@ public class LevelTwoMap extends Group {
 	timeline.getKeyFrames().add(keyFrame);
 	timeline.play();
     }
-
+    /**
+     *Returns the score of the level
+     *@return int score of the level
+     */
     public int getScore() {
 	return scoreNum;
     }
-
+    /**
+     *Returns the current lives of the level
+     *@return int the current lives of the level
+     */
     public int getLives() {
 	return livesNum;
     }
-
+    /**
+     *Returns whether the player has reached the finish line 
+     *@return boolean true if the player has reached the finish line, false otherwise
+     */
     public boolean getWin() {
 	return win;
     }
+    /**
+     *Sets the stats of the level based on the previous level
+     */
     public void setStats(LevelOneMap lvl1) {
 	scoreNum = lvl1.getScore();
 	score.setText("Score: " + scoreNum);
 	livesNum = lvl1.getLives();
 	lives.setText("Lives: " + livesNum);
     }
+     /**
+     *Resets lives, win status, and score of the level
+     */
     public void resetStats() {
 	scoreNum = 0;
 	score.setText("Score: " + scoreNum);
@@ -155,7 +193,10 @@ public class LevelTwoMap extends Group {
 	pepe.setY(450);
 	win = false;
     }
-
+    /**
+     *Returns timeline used in the level
+     *@return Timeline the animation timeline used in the level
+     */
     public Timeline getTimeline() {
 	return timeline;
     }

@@ -15,12 +15,18 @@ import javafx.scene.input.*;
 import javafx.animation.*;
 import java.util.*;
 import javafx.util.*;
-
+/**
+ *This Class represents an imageview of a Car that will be used in all three levels
+ */
 public class Car extends ImageView {
     private Image[] allCars;
     private Random ran = new Random();
     private Timeline timeline;
-    
+    /**
+     *Constructor for {@code Car} object that is able to be set at different y Cooridinates
+     *@param y the Y Coordinate of the path that the Y Coordinate will take 
+     *@param t the timeline that the car animation will run on
+     */ 
     public Car(Double y, Timeline t) {
 	super();
 	setImages();
@@ -29,14 +35,19 @@ public class Car extends ImageView {
 	this.setX(650);
 	timeline = t;
     }
-
+    /**
+     *Sets images of all three car colors to be used at random
+     */
     public void setImages() {
 	allCars = new Image[3];
 	allCars[0] = new Image("frogger/blueCar.png", 100, 100, true, true);
 	allCars[1] = new Image("frogger/greenCar.png", 100, 100, true, true);
 	allCars[2] = new Image("frogger/redCar.png", 100, 100, true, true);
     }//setImages
-
+    /**
+     *Adds car animation to timeline with a provided velocity
+     *@param speed the number of pixels the car will move each frame
+     */
     public void runCar(int speed) {
 	EventHandler<ActionEvent> handler = event -> {
 	    if(this.getX() < 0) {
