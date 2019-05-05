@@ -113,6 +113,7 @@ public class ArcadeApp extends Application {
 	newLevel3.setOnKeyPressed(newLevel3.getFrog().createKeyHandler());
 	newWin = new WinScreen();
 	newWin.setOnKeyPressed(newWin.createWelcomeKeyHandler());
+	new2048 = new TwentyFortyEight();
 	s = new Scene(newWelcome, 640, 520);
 	setTimelineW();
 	setTimeline1();
@@ -157,7 +158,7 @@ public class ArcadeApp extends Application {
 		timelineW.stop();
 	    }
 	    if(newWelcome.getSelect(2)) {
-		run2048(TwentyFortyEight);
+		s.setRoot(new2048);
 	    }
 	    
 	    if(newWin.getBack()) {
@@ -267,10 +268,5 @@ public class ArcadeApp extends Application {
 	timeline3.getKeyFrames().add(keyFrame);
     }
 
-    public void run2048(Class<? extends Application> anotherApp) throws Exception {
-	new2048 = anotherApp.newInstance();
-	Stage anotherStage = new Stage();
-	new2048.start(anotherStage);
-    }//run2048
-    
+          
 } // ArcadeApp

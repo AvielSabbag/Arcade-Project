@@ -19,7 +19,7 @@ import javafx.scene.Group;
 public class TwentyFortyEight extends Group{
 	MenuBar menuBar;
 	PaneComponent root;
-	@Override
+	
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
@@ -28,7 +28,7 @@ public class TwentyFortyEight extends Group{
 		VBox pane = new VBox();
 		root = new PaneComponent();
 		HBox textAboveGame = new HBox();
-		this.getChildren.add(pane);
+		this.getChildren().add(pane);
 		Text text = new Text("2048");
 		text.setFont(Font.font("Arial", 50));
 		text.setFill(Color.BLUE);
@@ -37,7 +37,7 @@ public class TwentyFortyEight extends Group{
 		pane.getChildren().add(menuBar);
 		pane.getChildren().add(textAboveGame);
 		pane.getChildren().add(root);
-		scene.setOnKeyPressed(root::handleKey);
+		this.setOnKeyPressed(root::handleKey);
 	}
 
 	/**
