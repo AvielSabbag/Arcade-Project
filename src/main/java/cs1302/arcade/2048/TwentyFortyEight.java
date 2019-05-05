@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -10,10 +11,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Represents an instance of the game 2048
+ */
 public class TwentyFortyEight extends Application{
 	MenuBar menuBar;
 	PaneComponent root;
 	@Override
+	/**
+	 * Adds all of the necessary components for the game to work
+	 */
 	public void start(Stage stage) throws Exception {
 		VBox pane = new VBox();
 		root = new PaneComponent();
@@ -35,6 +42,10 @@ public class TwentyFortyEight extends Application{
 		stage.show();
 		scene.setOnKeyPressed(root::handleKey);
 	}
+
+	/**
+	 * Helper method to create the menu at the top
+	 */
 	private void menuStuff() {
 		menuBar = new MenuBar();
 		Menu file = new Menu("File");
