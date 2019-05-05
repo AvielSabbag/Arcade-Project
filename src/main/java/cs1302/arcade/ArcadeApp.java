@@ -17,6 +17,8 @@ import cs1302.arcade.frogger.*;
 import javafx.event.*;
 import javafx.animation.*;
 import javafx.util.*;
+
+
 public class ArcadeApp extends Application {
 
     Group group = new Group();           // main container
@@ -32,6 +34,7 @@ public class ArcadeApp extends Application {
     Timeline timeline1 = new Timeline();
     Timeline timeline2 = new Timeline();
     Timeline timeline3 = new Timeline();
+    TwentyFourtyEight new2048;
     
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -152,7 +155,10 @@ public class ArcadeApp extends Application {
 		checkForWinsLosses1();
 		timelineW.stop();
 	    }
-
+	    if(newWelcome.getSelect(2)) {
+		
+	    }
+	    
 	    if(newWin.getBack()) {
 		newLevel1.resetStats();
 		newLevel2.resetStats();
@@ -259,4 +265,11 @@ public class ArcadeApp extends Application {
 	timeline3.setCycleCount(Timeline.INDEFINITE);
 	timeline3.getKeyFrames().add(keyFrame);
     }
+
+    public void run2048(Class<? extends Application> anotherApp) throws Exception {
+	new2048 = TwentyFourtyEight.newInstance();
+	Stage anotherStage = new Stage();
+	new2048.start(anotherStage);
+    }
+    
 } // ArcadeApp

@@ -1,4 +1,4 @@
-
+package cs1302.arcade;
 /**
  * Represents a location in the grid
  */

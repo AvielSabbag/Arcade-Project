@@ -159,6 +159,9 @@ public class WelcomeScreen extends BorderPane  {
 	if(gameOne.isUnderline()) {
 	    gameOneSelect = true;
 	}
+	if(gameTwo.isUnderline()) {
+	    gameTwoSelect = true;
+	}
 	    
     }
 

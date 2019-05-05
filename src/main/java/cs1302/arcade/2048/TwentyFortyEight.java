@@ -1,3 +1,4 @@
+package cs1302.arcade.2048;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

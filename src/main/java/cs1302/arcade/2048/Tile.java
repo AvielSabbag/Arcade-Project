@@ -1,3 +1,4 @@
+package cs1302.arcade;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
