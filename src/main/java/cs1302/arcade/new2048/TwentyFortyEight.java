@@ -11,22 +11,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.Group;
 
 /**
  * Represents an instance of the game 2048
  */
-public class TwentyFortyEight extends Application{
+public class TwentyFortyEight extends Group{
 	MenuBar menuBar;
 	PaneComponent root;
 	@Override
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
-	public void start(Stage stage) throws Exception {
+	public TwentyFortyEight() throws Exception {
+    super();
 		VBox pane = new VBox();
 		root = new PaneComponent();
 		HBox textAboveGame = new HBox();
-		Scene scene = new Scene(pane);
+		this.getChildren.add(pane);
 		Text text = new Text("2048");
 		text.setFont(Font.font("Arial", 50));
 		text.setFill(Color.BLUE);
@@ -35,12 +37,6 @@ public class TwentyFortyEight extends Application{
 		pane.getChildren().add(menuBar);
 		pane.getChildren().add(textAboveGame);
 		pane.getChildren().add(root);
-		stage.setWidth(500);
-		stage.setHeight(650);
-		stage.setResizable(false);
-		stage.setTitle("2048");
-		stage.setScene(scene);
-		stage.show();
 		scene.setOnKeyPressed(root::handleKey);
 	}
 
