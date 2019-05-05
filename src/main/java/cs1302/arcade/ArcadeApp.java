@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import cs1302.arcade.welcomeScreen.*;
 import cs1302.arcade.frogger.*;
+import cs1302.arcade.new2048.TwentyFortyEight;
 import javafx.event.*;
 import javafx.animation.*;
 import javafx.util.*;
@@ -34,7 +35,7 @@ public class ArcadeApp extends Application {
     Timeline timeline1 = new Timeline();
     Timeline timeline2 = new Timeline();
     Timeline timeline3 = new Timeline();
-    TwentyFourtyEight new2048;
+    TwentyFortyEight new2048;
     
     /**
      * Return a mouse event handler that moves to the rectangle to a random
@@ -156,7 +157,7 @@ public class ArcadeApp extends Application {
 		timelineW.stop();
 	    }
 	    if(newWelcome.getSelect(2)) {
-		
+		run2048(TwentyFortyEight);
 	    }
 	    
 	    if(newWin.getBack()) {
@@ -267,9 +268,9 @@ public class ArcadeApp extends Application {
     }
 
     public void run2048(Class<? extends Application> anotherApp) throws Exception {
-	new2048 = TwentyFourtyEight.newInstance();
+	new2048 = anotherApp.newInstance();
 	Stage anotherStage = new Stage();
 	new2048.start(anotherStage);
-    }
+    }//run2048
     
 } // ArcadeApp
