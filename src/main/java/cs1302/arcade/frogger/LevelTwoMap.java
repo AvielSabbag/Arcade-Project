@@ -112,13 +112,13 @@ public class LevelTwoMap extends Group {
 	return pepe;
     }
     /**
-     *Begins the bottom Car animation loop with a speed of 6 pixels/frame
+     *Begins the bottom Car animation loop with a speed of 10 pixels/frame
      */
     public void spawnCarBottom() {
 	bottomCar.runCar(10);
     }
     /**
-     *Begins the top Car animation loop with a speed of 6 pixels/frame
+     *Begins the top Car animation loop with a speed of 10 pixels/frame
      */
     public void spawnCarTop() {
 	topCar.runCar(10);
