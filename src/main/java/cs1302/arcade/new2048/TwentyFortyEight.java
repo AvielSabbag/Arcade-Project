@@ -23,7 +23,7 @@ public class TwentyFortyEight extends Group{
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
-	public TwentyFortyEight() throws Exception {
+	public TwentyFortyEight() {
     super();
 		VBox pane = new VBox();
 		root = new PaneComponent();

@@ -41,7 +41,7 @@ public class Tile extends ImageView{
 	 */
 	public void setValue(int value) {
 		this.value = value;
-		this.setImage(new Image(value + ".png"));
+		this.setImage(new Image("2048/" + value + ".png"));
 	}
 
 	/**
