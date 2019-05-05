@@ -34,7 +34,7 @@ public class WelcomeScreen extends BorderPane  {
 	setGamesLayer();
 	setStack();
 	gameOneSelect = false;
-	gameTwoSelect = true;
+	gameTwoSelect = false;
 	this.setCenter(stack);
     }
     

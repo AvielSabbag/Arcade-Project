@@ -128,7 +128,8 @@ public class ArcadeApp extends Application {
 	newLevel2.requestFocus();
 	newLevel3.requestFocus();
 	newWin.requestFocus();
-	checkForWelcomeScreen();		
+	checkForWelcomeScreen();
+	new2048.requestFocus();
     } // start
 
     public void checkForWelcomeScreen() {
@@ -159,6 +160,7 @@ public class ArcadeApp extends Application {
 	    }
 	    if(newWelcome.getSelect(2)) {
 		s.setRoot(new2048);
+		new2048.requestFocus();
 	    }
 	    
 	    if(newWin.getBack()) {
