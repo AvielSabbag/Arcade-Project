@@ -25,13 +25,14 @@ public class TwentyFortyEight extends Group{
   Timeline timeline;
   Text scoret;
 	boolean quit;
+ VBox pane;
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
 	public TwentyFortyEight(Timeline t) {
     super();
     timeline = t;
-		VBox pane = new VBox();
+		pane = new VBox();
 		root = new PaneComponent();
 		HBox textAboveGame = new HBox();
 		this.getChildren().add(pane);
@@ -71,6 +72,10 @@ public class TwentyFortyEight extends Group{
  public void resetStats(){
    root.setScore(0);
    this.quit = false;
+   root = new PaneComponent();
+   pane.getChildren().remove(2);
+   pane.getChildren().add(root);
+   this.setOnKeyPressed(root::handleKey);
  }
  public void updateScore() {
    EventHandler<ActionEvent> handler = event -> {
