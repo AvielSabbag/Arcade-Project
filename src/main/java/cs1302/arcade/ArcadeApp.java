@@ -115,7 +115,7 @@ public class ArcadeApp extends Application {
 	newWin = new WinScreen();
 	newWin.setOnKeyPressed(newWin.createWelcomeKeyHandler());
 	new2048 = new TwentyFortyEight(timeline2048);
-	s = new Scene(newWelcome, 640, 520);
+	s = new Scene(newWelcome, 640, 620);
 	setTimelineW();
 	setTimeline1();
 	setTimeline2();
@@ -162,6 +162,7 @@ public class ArcadeApp extends Application {
 	    if(newWelcome.getSelect(2)) {
 		s.setRoot(new2048);
 		new2048.requestFocus();
+    timeline2048.play();
 	    }
 	    
 	    if(newWin.getBack()) {
@@ -273,7 +274,7 @@ public class ArcadeApp extends Application {
 
     public void setTimeline2048() {
 	EventHandler<ActionEvent> handler = event -> {
-	    if(new2048.getQuit()) {
+    if(new2048.getQuit()) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();

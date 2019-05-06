@@ -217,7 +217,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(xLocs[x],yLocs[y]).getTile());
 							findLoc(xLocs[x],yLocs[y]).removeTile();
 							tf = true;
-              scoreNum = scoreNum + findLoc(x,y+120).getTile().getValue();
+              scoreNum = scoreNum + findLoc(xLocs[x],yLocs[y]+120).getTile().getValue();
 						}
 					}
 				}
@@ -331,7 +331,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(xLocs[x],yLocs[y]).getTile());
 							findLoc(xLocs[x],yLocs[y]).removeTile();
 							tf = true;
-              scoreNum = scoreNum + findLoc(x+120,y).getTile().getValue();
+              scoreNum = scoreNum + findLoc(xLocs[x]+120,yLocs[y]).getTile().getValue();
 						}
 					}
 				}
@@ -360,5 +360,8 @@ public class PaneComponent extends Pane{
 	}
  public int getScore(){
    return scoreNum;
+ }
+ public void setScore(int n){
+   this.scoreNum = n;
  }
 }

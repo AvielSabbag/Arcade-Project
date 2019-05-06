@@ -24,7 +24,7 @@ public class TwentyFortyEight extends Group{
 	PaneComponent root;
   Timeline timeline;
   Text scoret;
-	
+	boolean quit;
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
@@ -48,6 +48,7 @@ public class TwentyFortyEight extends Group{
 		pane.getChildren().add(root);
 		this.setOnKeyPressed(root::handleKey);
    updateScore();
+   quit = false;
 	}
 
 	/**
@@ -57,10 +58,20 @@ public class TwentyFortyEight extends Group{
 		menuBar = new MenuBar();
 		Menu file = new Menu("File");
 		MenuItem exit = new MenuItem("Exit");
+   exit.setOnAction(event -> {setQuit();});
 		file.getItems().add(exit);
 		menuBar.getMenus().add(file);
 	}
- 
+ public boolean getQuit(){
+   return this.quit;
+ }
+ public void setQuit(){
+   this.quit = true;
+ }
+ public void resetStats(){
+   root.setScore(0);
+   this.quit = false;
+ }
  public void updateScore() {
    EventHandler<ActionEvent> handler = event -> {
      scoret.setText("Score: " + root.getScore());
