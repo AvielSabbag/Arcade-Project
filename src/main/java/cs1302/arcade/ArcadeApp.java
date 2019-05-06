@@ -160,12 +160,12 @@ public class ArcadeApp extends Application {
 		newLevel1.resetStats();
 		newLevel2.resetStats();
 		newLevel3.resetStats();
-		new2048.resetStats();
 		s.setRoot(newLevel1);
 		checkForWinsLosses1();
 		timelineW.stop();
 	    }
 	    if(newWelcome.getSelect(2)) {
+		new2048.resetStats();
 		s.setRoot(new2048);
 		new2048.requestFocus();
 		checkForQuit2048();
