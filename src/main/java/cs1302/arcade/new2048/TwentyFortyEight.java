@@ -58,7 +58,7 @@ public class TwentyFortyEight extends Group{
 		menuBar = new MenuBar();
 		Menu file = new Menu("File");
 		MenuItem exit = new MenuItem("Exit");
-   exit.setOnAction(event -> {setQuit();});
+		exit.setOnAction(e -> setQuit());
 		file.getItems().add(exit);
 		menuBar.getMenus().add(file);
 	}

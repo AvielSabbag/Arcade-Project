@@ -120,6 +120,7 @@ public class ArcadeApp extends Application {
 	setTimeline1();
 	setTimeline2();
 	setTimeline3();
+	setTimeline2048();
 	stage.setTitle("testing");
 	stage.setScene(s);
 	stage.sizeToScene();
@@ -148,6 +149,10 @@ public class ArcadeApp extends Application {
     public void checkForWinsLosses3() {
 	timeline3.play();
     }
+
+    public void checkForQuit2048() {
+	timeline2048.play();
+    }
     
     public void setTimelineW() {
 	EventHandler<ActionEvent> handler = event -> {
@@ -155,6 +160,7 @@ public class ArcadeApp extends Application {
 		newLevel1.resetStats();
 		newLevel2.resetStats();
 		newLevel3.resetStats();
+		new2048.resetStats();
 		s.setRoot(newLevel1);
 		checkForWinsLosses1();
 		timelineW.stop();
@@ -162,7 +168,8 @@ public class ArcadeApp extends Application {
 	    if(newWelcome.getSelect(2)) {
 		s.setRoot(new2048);
 		new2048.requestFocus();
-    timeline2048.play();
+		checkForQuit2048();
+		timelineW.stop();
 	    }
 	    
 	    if(newWin.getBack()) {
@@ -274,7 +281,7 @@ public class ArcadeApp extends Application {
 
     public void setTimeline2048() {
 	EventHandler<ActionEvent> handler = event -> {
-    if(new2048.getQuit()) {
+	    if(new2048.getQuit()) {
 		newWelcome.resetSelect();
 		s.setRoot(newWelcome);
 		newWelcome.requestFocus();
