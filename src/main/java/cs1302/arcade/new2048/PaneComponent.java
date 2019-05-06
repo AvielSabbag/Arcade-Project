@@ -83,7 +83,6 @@ public class PaneComponent extends Pane{
 	 * adds a random 2 or 4 in a random open spot on the board
 	 */
 	public void update(){
-		System.out.println("test");
 		boolean c = true;
 		//repeats the loop until it generates a location that is empty
 		while(c){
@@ -148,6 +147,7 @@ public class PaneComponent extends Pane{
 	 * @return true if tiles combine
 	 */
 	private boolean combineUp() {
+    System.out.println("Up");
 		Tile tile = null;
 		boolean tf = false;
 		if(k ==0) {
@@ -203,6 +203,7 @@ public class PaneComponent extends Pane{
 	 * @return true if tiles combine
 	 */
 	private boolean combineDown() {
+    System.out.println("Down");
 		Tile tile = null;
 		boolean tf = false;
 		if(k ==0) {
@@ -258,6 +259,7 @@ public class PaneComponent extends Pane{
 	 * @return true if tiles combine
 	 */
 	private boolean combineLeft() {
+    System.out.println("Left");
 		Tile tile = null;
 		boolean tf = false;
 		if(k ==0) {
@@ -313,6 +315,7 @@ public class PaneComponent extends Pane{
 	 * @return true if tiles combine
 	 */
 	private boolean combineRight() {
+    System.out.println("Right");
 		Tile tile = null;
 		boolean tf = false;
 		if(k ==0) {
