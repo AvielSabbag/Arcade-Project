@@ -18,7 +18,7 @@ import cs1302.arcade.new2048.TwentyFortyEight;
 import javafx.event.*;
 import javafx.animation.*;
 import javafx.util.*;
-
+/** Application that runs arcade with 2048 and Frogger as the two playable games */
 
 public class ArcadeApp extends Application {
 
@@ -35,6 +35,7 @@ public class ArcadeApp extends Application {
     Timeline timeline1 = new Timeline();
     Timeline timeline2 = new Timeline();
     Timeline timeline3 = new Timeline();
+    Timeline timeline2048 = new Timeline();
     TwentyFortyEight new2048;
     
     /**
@@ -113,7 +114,7 @@ public class ArcadeApp extends Application {
 	newLevel3.setOnKeyPressed(newLevel3.getFrog().createKeyHandler());
 	newWin = new WinScreen();
 	newWin.setOnKeyPressed(newWin.createWelcomeKeyHandler());
-	new2048 = new TwentyFortyEight();
+	new2048 = new TwentyFortyEight(timeline2048);
 	s = new Scene(newWelcome, 640, 520);
 	setTimelineW();
 	setTimeline1();
@@ -270,5 +271,18 @@ public class ArcadeApp extends Application {
 	timeline3.getKeyFrames().add(keyFrame);
     }
 
-       
+    public void setTimeline2048() {
+	EventHandler<ActionEvent> handler = event -> {
+	    if(new2048.getQuit()) {
+		newWelcome.resetSelect();
+		s.setRoot(newWelcome);
+		newWelcome.requestFocus();
+		checkForWelcomeScreen();
+		timeline2048.stop();
+	    }
+	};
+	KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
+	timeline2048.setCycleCount(Timeline.INDEFINITE);
+	timeline2048.getKeyFrames().add(keyFrame);
+    }
 } // ArcadeApp
