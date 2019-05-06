@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
  * Represents the board that holds all of the tiles
  */
 public class PaneComponent extends Pane{
+  int scoreNum = 0;
 	int[] xLocs = new int[4];
 	int[] yLocs = new int[4];
 	ArrayList<Location> locations = new ArrayList<Location>();
@@ -159,6 +160,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(x,y).getTile());
 							findLoc(x,y).removeTile();
 							tf = true;
+              scoreNum = scoreNum + findLoc(x,y-120).getTile().getValue();
 						}
 					}
 				}
@@ -215,6 +217,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(xLocs[x],yLocs[y]).getTile());
 							findLoc(xLocs[x],yLocs[y]).removeTile();
 							tf = true;
+              scoreNum = scoreNum + findLoc(x,y+120).getTile().getValue();
 						}
 					}
 				}
@@ -271,6 +274,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(x,y).getTile());
 							findLoc(x,y).removeTile();
 							tf = true;
+              scoreNum = scoreNum + findLoc(x-120,y).getTile().getValue();
 						}
 					}
 				}
@@ -327,6 +331,7 @@ public class PaneComponent extends Pane{
 							this.getChildren().remove(findLoc(xLocs[x],yLocs[y]).getTile());
 							findLoc(xLocs[x],yLocs[y]).removeTile();
 							tf = true;
+              scoreNum = scoreNum + findLoc(x+120,y).getTile().getValue();
 						}
 					}
 				}
@@ -353,5 +358,7 @@ public class PaneComponent extends Pane{
 		}
 		return null;
 	}
-
+ public int getScore(){
+   return scoreNum;
+ }
 }

@@ -12,6 +12,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Group;
+import javafx.event.*;
+import javafx.animation.*;
+import javafx.util.*;
 
 /**
  * Represents an instance of the game 2048
@@ -19,12 +22,15 @@ import javafx.scene.Group;
 public class TwentyFortyEight extends Group{
 	MenuBar menuBar;
 	PaneComponent root;
+  Timeline timeline;
+  Text scoret;
 	
 	/**
 	 * Adds all of the necessary components for the game to work
 	 */
-	public TwentyFortyEight() {
+	public TwentyFortyEight(Timeline t) {
     super();
+    timeline = t;
 		VBox pane = new VBox();
 		root = new PaneComponent();
 		HBox textAboveGame = new HBox();
@@ -32,12 +38,16 @@ public class TwentyFortyEight extends Group{
 		Text text = new Text("2048");
 		text.setFont(Font.font("Arial", 50));
 		text.setFill(Color.BLUE);
-		textAboveGame.getChildren().add(text);
+     scoret = new Text("Score: 0");  
+     scoret.setFont(Font.font("Arial", 25));
+    scoret.setFill(Color.BLUE);
+		textAboveGame.getChildren().addAll(text, scoret);
 		menuStuff();
 		pane.getChildren().add(menuBar);
 		pane.getChildren().add(textAboveGame);
 		pane.getChildren().add(root);
 		this.setOnKeyPressed(root::handleKey);
+   updateScore();
 	}
 
 	/**
@@ -50,4 +60,14 @@ public class TwentyFortyEight extends Group{
 		file.getItems().add(exit);
 		menuBar.getMenus().add(file);
 	}
+ 
+ public void updateScore() {
+   EventHandler<ActionEvent> handler = event -> {
+     scoret.setText("Score: " + root.getScore());
+     };
+     KeyFrame keyFrame = new KeyFrame(Duration.millis(1000/60), handler);
+     timeline.setCycleCount(Timeline.INDEFINITE);
+     timeline.getKeyFrames().add(keyFrame);
+     timeline.play();
+     }
 }
