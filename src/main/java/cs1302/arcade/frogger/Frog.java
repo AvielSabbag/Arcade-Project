@@ -21,7 +21,8 @@ public class Frog extends ImageView {
     private Double yCor;
     private boolean quit; /**The boolean that holds whether or not a player has quit the game*/
     /**
-     *The constructor for each frog instance. Sets the quit {@code boolean} to false and sets initial xCor and yCor
+     *The constructor for each frog instance. Sets the quit {@code boolean} to false and 
+     *sets initial xCor and yCor
      */
     public Frog() {
 	super();
@@ -41,10 +42,14 @@ public class Frog extends ImageView {
 	this.setFocusTraversable(true);
 	return event -> {
 	    Thread t = new Thread(() -> {
-		    if(event.getCode() == KeyCode.LEFT && this.getX() > 10) Platform.runLater(() -> {this.setX(this.getX() - 15.0);});
-		    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550) Platform.runLater(() -> {this.setX(this.getX() + 15.0);});
-		    if(event.getCode() == KeyCode.UP && this.getY() > 10) Platform.runLater(() -> {this.setY(this.getY() - 15.0);});
-		    if(event.getCode() == KeyCode.DOWN && this.getY() < 450) Platform.runLater(() -> {this.setY(this.getY() + 15.0);});
+		    if(event.getCode() == KeyCode.LEFT && this.getX() > 10)
+			Platform.runLater(() -> {this.setX(this.getX() - 15.0);});
+		    if(event.getCode() == KeyCode.RIGHT && this.getX() < 550)
+			Platform.runLater(() -> {this.setX(this.getX() + 15.0);});
+		    if(event.getCode() == KeyCode.UP && this.getY() > 10)
+			Platform.runLater(() -> {this.setY(this.getY() - 15.0);});
+		    if(event.getCode() == KeyCode.DOWN && this.getY() < 450)
+			Platform.runLater(() -> {this.setY(this.getY() + 15.0);});
 		    if(event.getCode() == KeyCode.Q) quit = true;
 	    });
 	    t.setDaemon(true);
