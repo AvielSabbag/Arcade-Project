@@ -88,13 +88,13 @@ public class LevelOneMap extends Group {
 	scoreNum = 0;
 	livesNum = 3;
 	score = new Text("Score: " + scoreNum);
-	level1 = new Text("LEVEL ONE");
+	level1 = new Text("LEVEL ONE      (Press q to quit)");
 	lives = new Text("Lives: " + livesNum);
 	scoreLayer.getChildren().addAll(score, level1, lives);
 	score.setTextAlignment(TextAlignment.LEFT);
 	lives.setTextAlignment(TextAlignment.RIGHT);
 	level1.setTextAlignment(TextAlignment.CENTER);
-	scoreLayer.setSpacing(200.0);
+	scoreLayer.setSpacing(100.0);
     }
     /**
      *Aligns roads into the scene graph

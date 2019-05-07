@@ -16,7 +16,7 @@ import javafx.animation.*;
 import javafx.util.*;
 import java.util.*;
 /**
- *This class builds the first level of frogger
+ *This class builds the third level of frogger
  */
 public class LevelThreeMap extends Group {
     private ImageView grass;
@@ -42,7 +42,7 @@ public class LevelThreeMap extends Group {
     private Bird bobo;
     private Rectangle finishLine;
     /**
-     *Constructor for first level
+     *Constructor for third level
      *@param t {@code Timeline} that the cars of the level run on
      */
     public LevelThreeMap(Timeline t) {
@@ -94,13 +94,13 @@ public class LevelThreeMap extends Group {
 	scoreNum = 0;
 	livesNum = 3;
 	score = new Text("Score: " + scoreNum);
-	level1 = new Text("LEVEL THREE");
+	level1 = new Text("LEVEL THREE      (Press q to quit)");
 	lives = new Text("Lives: " + livesNum);
 	scoreLayer.getChildren().addAll(score, level1, lives);
 	score.setTextAlignment(TextAlignment.LEFT);
 	lives.setTextAlignment(TextAlignment.RIGHT);
 	level1.setTextAlignment(TextAlignment.CENTER);
-	scoreLayer.setSpacing(200.0);
+	scoreLayer.setSpacing(100.0);
     }
      /**
      *Aligns roads into the scene graph

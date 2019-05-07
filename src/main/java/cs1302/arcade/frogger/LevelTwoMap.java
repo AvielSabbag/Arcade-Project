@@ -16,7 +16,7 @@ import javafx.animation.*;
 import javafx.util.*;
 import java.util.*;
 /**
- *This class builds the first level of frogger
+ *This class builds the second level of frogger
  */
 public class LevelTwoMap extends Group {
     private ImageView grass;
@@ -40,7 +40,7 @@ public class LevelTwoMap extends Group {
     private StackPane stack;
     private boolean win;
     /**
-     *Constructor for first level
+     *Constructor for second level
      *@param t {@code Timeline} that the cars of the level run on
      */
     public LevelTwoMap(Timeline t) {
@@ -88,13 +88,13 @@ public class LevelTwoMap extends Group {
 	scoreNum = 0;
 	livesNum = 3;
 	score = new Text("Score: " + scoreNum);
-	level1 = new Text("LEVEL TWO");
+	level1 = new Text("LEVEL TWO      (Press q to quit)");
 	lives = new Text("Lives: " + livesNum);
 	scoreLayer.getChildren().addAll(score, level1, lives);
 	score.setTextAlignment(TextAlignment.LEFT);
 	lives.setTextAlignment(TextAlignment.RIGHT);
 	level1.setTextAlignment(TextAlignment.CENTER);
-	scoreLayer.setSpacing(200.0);
+	scoreLayer.setSpacing(100.0);
     }
     /**
      *Aligns roads into the scene graph
