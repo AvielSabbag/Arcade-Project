@@ -14,7 +14,7 @@ import javafx.scene.effect.*;
 import javafx.scene.input.*;
 
 public class WelcomeScreen extends BorderPane  {
-    
+    /** class that builds the functioning welcome screen with list of games */
     private StackPane stack;
     private Rectangle rect;
     private VBox titleLayer;
@@ -26,7 +26,7 @@ public class WelcomeScreen extends BorderPane  {
     private Text exit;
     private boolean gameOneSelect;
     private boolean gameTwoSelect;
-
+    /** Constructor for welcome screen */
     public WelcomeScreen() {
 	super();
 	setRect();
@@ -37,7 +37,7 @@ public class WelcomeScreen extends BorderPane  {
 	gameTwoSelect = false;
 	this.setCenter(stack);
     }
-    
+    /** sets and aligns background rectangle */
     public void setRect() {
 	Color rCol = Color.DARKSLATEBLUE;
 	rect = new Rectangle(400, 360, rCol);
@@ -45,7 +45,7 @@ public class WelcomeScreen extends BorderPane  {
 	rect.setStroke(sCol);
 	rect.setStrokeWidth(5);
     }//setRect
-    
+    /** sets and aligns all nodes into a stackpane */
     public StackPane setStack() {
 	stack = new StackPane();
 	stack.setMaxSize(400, 360);
@@ -58,7 +58,7 @@ public class WelcomeScreen extends BorderPane  {
 	stack.getChildren().addAll(rect, titleLayer, gamesLayer, exit);
 	return stack;
     }//setStack
-
+    /** Sets font of title */
     public void setTitle() {
 	DropShadow ds = new DropShadow();
 	ds.setOffsetY(3.0f);
@@ -74,7 +74,7 @@ public class WelcomeScreen extends BorderPane  {
 	title.setFont(Font.font(null, FontWeight.BOLD, 32));
 	
     }//setTitle
-
+    /** sets font of authors */
     public void setNames() {
 	names = new Text();
 	names.setCache(true);
@@ -84,7 +84,7 @@ public class WelcomeScreen extends BorderPane  {
 	names.setText("BY: " + "\n"+ "AVIEL SABBAG & CAM LAHEY");
 	names.setFont(Font.font(null, FontWeight.BOLD, 18));
     }
-
+    /** sets all text into a VBox */
     public void setTitleLayer() {
 	titleLayer = new VBox(10);
 	titleLayer.setAlignment(Pos.TOP_CENTER);
@@ -92,7 +92,7 @@ public class WelcomeScreen extends BorderPane  {
 	setNames();
 	titleLayer.getChildren().addAll(title, names);
     }
-
+    /** sets font of game lists and exit */
     public void setGames() {
 	gameOne = new Text();
 	gameOne.setCache(true);
@@ -121,7 +121,7 @@ public class WelcomeScreen extends BorderPane  {
 
 	
     }
-
+    /** sets game list into a VBox */
     public void setGamesLayer() {
 	gamesLayer = new VBox(10);
 	gamesLayer.setAlignment(Pos.CENTER_LEFT);
@@ -130,7 +130,7 @@ public class WelcomeScreen extends BorderPane  {
 	gamesLayer.setMargin(gameOne, new Insets(10, 100, 10, 100));
 	gamesLayer.setMargin(gameTwo, new Insets(10, 100, 10, 100));
     }
-
+    /** underlines one of the games in the list */
     public void turnBold() {
 	if(gameOne.isUnderline()) {
 	    gameOne.setUnderline(false);
@@ -140,7 +140,7 @@ public class WelcomeScreen extends BorderPane  {
 	    gameOne.setUnderline(true);
 	}
     }
-
+    /** underlines the exit option for easier selection */
     public void turnExitBold() {
 	if(gameOne.isUnderline() || gameTwo.isUnderline()) {
 	    gameOne.setUnderline(false);
@@ -151,7 +151,7 @@ public class WelcomeScreen extends BorderPane  {
 	    exit.setUnderline(false);
 	}
     }
-
+    /** allows for selection of game one, game two, or exit */
     public void performEnter() {
 	if(exit.isUnderline()) {
 	    Platform.exit();
@@ -164,7 +164,9 @@ public class WelcomeScreen extends BorderPane  {
 	}
 	    
     }
-
+    /** creates KeyEvent for navigating the list of games and selecting one
+     *@return EventHandler 
+     */
     public EventHandler<? super KeyEvent> createWelcomeKeyHandler() {
 	return event -> {
 	    if(event.getCode() == KeyCode.UP) turnBold();
@@ -174,13 +176,16 @@ public class WelcomeScreen extends BorderPane  {
 	    if(event.getCode() == KeyCode.ENTER) performEnter();
 	};
     }
-
+    /** Returns which game has been selected 
+     *@param i the number of the game to be checked for selection
+     *@return boolean true if game correpsonding with parameter has been selected; false otherwise
+     */
     public boolean getSelect(int i) {
 	if(i == 1) return gameOneSelect;
 	if(i == 2) return gameTwoSelect;
 	else return false;
     }
-
+    /** resets selection of game for reuse of welcome screen */
     public void resetSelect() {
 	gameOneSelect = false;
 	gameTwoSelect = false;

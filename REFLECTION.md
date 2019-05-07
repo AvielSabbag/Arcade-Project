@@ -6,6 +6,11 @@ click on this file in your team's GitHub repository website, then you will see
 that the Markdown is transformed into nice looking HTML.
 
 Here is a sample entry (delete this line; also: feel free to copy/paste/modify):
+## TUE 2019-05-07 @10:17 AM EST
+1. **DONE:** The entire application is complete!
+2. **TODO:** Nothing!
+3. **PROB:** Nothing!
+
 ## TUE 2019-04-30 @ 6:46 PM EST
 1. **DONE:** Levels one and two for frogger are complete with lives, score, and quit functionality, and work has begun on assembling level three. The movement of the 2048 tiles is finshed.
 2. **TODO:** Finish level three of frogger and finish logic of combining tiles in 2048
